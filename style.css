@@ -1,3 +1,73 @@
+body {
+  background-color: seagreen;
+}
+
 #root {
-  color: red;
+  margin: auto 40px auto 40px;
+  background-color: rgb(223, 182, 182);
+}
+.parentDiv {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: column;
+  background-color: rgb(223, 182, 182);
+}
+.TheChildDiv {
+  justify-content: column;
+  margin: 40px;
+  max-width: 300px;
+  padding: 5px;
+  /* box-shadow: 10px 10px 5px #aaaaaa; */
+  background-color: white;
+  border: gray solid 2px;
+  border-radius: 4px;
+}
+
+.TheChildDiv:hover {
+  box-shadow: 0px 0px 0px 10px rgb(8, 7, 7, 0.5);
+
+  transform: scale(1.1);
+  transition: 1s;
+}
+.image-ul {
+  width: 250px;
+  height: auto;
+  margin: 0px 20px auto 25px;
+}
+
+.my-h3 {
+  padding-left: 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+  border: purple solid 3px;
+  border-radius: 10px;
+  background-color: rgb(195, 78, 199);
+}
+#styling-input {
+  width: 200px;
+  height: 30px;
+  padding: 10px;
+  border-radius: 4px;
+  margin-right: 200px;
+  margin-left: 150px;
+}
+#myEpisode {
+  background-color: greenyellow;
+  padding: 15px;
+  border-radius: 3px;
+}
+
+.footer-styling {
+  background-color: rgb(196, 69, 196);
+  padding: 15px;
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+form {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: red;
+  padding: 20px;
 }
