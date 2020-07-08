@@ -1,24 +1,39 @@
-//You can edit ALL of the code here
+const rootElem = document.getElementById("root");
+// the search input
+let searchBar = document.forms["Search-episode"].querySelector("input");
+// Select episodes
+let getSelection = document.getElementById("select-episodes");
+// create select shows drop down menu
+let getShowSelected = document.getElementById("select-shows");
+// addEventListener for the select show drop down menu
+getShowSelected.addEventListener("change", fetchingData);
+
+let getMyBtn = document.getElementById("myBtn");
+getMyBtn.addEventListener("click", setup);
+
 function setup() {
   let allShows = getAllShows();
-  console.log(allShows.length);
 
   let orderOfShows = allShows.sort((a, b) => a.name.localeCompare(b.name));
-
+  getSelection.style.display = "none";
   displayShows(orderOfShows);
   displayShowsOnScreen(orderOfShows);
   // fetchingData();
 }
 
-function displayingEpisodes(num, total) {
+function displayingNumOfEpisodes(num, total) {
   let getNumOfEpisodes = document.getElementById("myEpisode");
   getNumOfEpisodes.innerHTML = `Display: ${num.length}/ ${total.length} episodes`;
 }
 
-const rootElem = document.getElementById("root");
+function displayingNumOfShow(num, total) {
+  let getNumOfEpisodes = document.getElementById("myEpisode");
+  getNumOfEpisodes.innerHTML = `Display: ${num.length}/ ${total.length} shows`;
+}
+
 function makePageForEpisodes(episodeList) {
   rootElem.innerHTML = "";
-
+  getSelection.style.display = "";
   //Create the parent div
   let TheMainParentDiv = document.createElement("div");
   TheMainParentDiv.className += "parentDiv";
@@ -62,11 +77,9 @@ function makePageForEpisodes(episodeList) {
   //calling functions from outside
   footerFunc();
   mySearchBox(episodeList);
-  displayingEpisodes(episodeList, episodeList);
+  displayingNumOfEpisodes(episodeList, episodeList);
 }
 
-// the search input
-let searchBar = document.forms["Search-episode"].querySelector("input");
 function mySearchBox(search) {
   let episodes = document.querySelectorAll(".TheChildDiv");
   let newEpisodes = Array.from(episodes);
@@ -84,12 +97,9 @@ function mySearchBox(search) {
     });
     //redisplay number of filtered episodes from the searchBar
     let newArray = newEpisodes.filter((val) => val.style.display === "block");
-    displayingEpisodes(newArray, newEpisodes);
+    displayingNumOfEpisodes(newArray, newEpisodes);
   });
 }
-
-// Select episodes
-let getSelection = document.getElementById("select-episodes");
 
 //new function for the dropdown menu
 function selection(episodeList) {
@@ -117,7 +127,7 @@ function selection(episodeList) {
     });
     let list = Array.from(episodes2);
     let newArray = list.filter((val) => val.style.display === "block");
-    displayingEpisodes(newArray, list);
+    displayingNumOfEpisodes(newArray, list);
   });
 }
 
@@ -139,8 +149,7 @@ function showNameAndEpisodes(name, season, episode) {
     return name + " - S0" + season + "E" + episode;
   }
 }
-// create select shows drop down menu
-let getShowSelected = document.getElementById("select-shows");
+
 function displayShows(shows) {
   shows.forEach((show) => {
     let createOption = document.createElement("option");
@@ -164,8 +173,6 @@ function fetchingData() {
       console.log(error);
     });
 }
-// addEventListener for the select show drop down menu
-getShowSelected.addEventListener("change", fetchingData);
 
 // level 500
 function displayShowsOnScreen(showOnScreen) {
@@ -173,38 +180,55 @@ function displayShowsOnScreen(showOnScreen) {
   showOnScreen.forEach((show) => {
     let createChildDiv = document.createElement("div");
     createChildDiv.id = "showProfile";
-    let createChildDiv2 = document.createElement("div");
+    let createSpanDiv = document.createElement("div");
+    createSpanDiv.className = "span-style";
+    let contentDiv = document.createElement("div");
+    contentDiv.id = "style-content";
     let createH1 = document.createElement("h1");
+    createH1.className = "style-head";
     let createImage = document.createElement("img");
-    let createPara = document.createElement("p");
+    createImage.className = "style-image";
+    let summery = document.createElement("p");
+    summery.className = "summer-style";
     let rated = document.createElement("p");
     let genres = document.createElement("p");
     let status = document.createElement("p");
     let runTime = document.createElement("p");
-    rated.innerText = `Rated: ${show.rating.average}`;
-    genres.innerHTML = `Genres:${show.genres.toString().replace(/,/g, "|")}`;
     createH1.innerText = show.name;
-    createPara.innerHTML = show.summary;
-
+    summery.innerHTML = show.summary;
     if (show.image) {
       createImage.src = show.image.medium;
     } else {
       createImage.src =
         "https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg";
     }
+    rated.innerText = `Rated: ${show.rating.average} `;
+    genres.innerHTML = `Genres: ${show.genres.toString().replace(/,/g, "|")} `;
+    status.innerText = `Status: ${show.status} `;
+    runTime.innerText = `RunningTime: ${show.runtime} `;
     createChildDiv.appendChild(createH1);
-    createChildDiv.appendChild(createPara);
-    createChildDiv.appendChild(createImage);
+    // createChildDiv.appendChild(createImage);
+    // createChildDiv.appendChild(summery);
+    contentDiv.appendChild(createImage);
+    contentDiv.appendChild(summery);
+    createSpanDiv.appendChild(rated);
+    createSpanDiv.appendChild(genres);
+    createSpanDiv.appendChild(status);
+    createSpanDiv.appendChild(runTime);
+    // createChildDiv.appendChild(createSpanDiv);
+    contentDiv.appendChild(createSpanDiv);
+    createChildDiv.appendChild(contentDiv);
+    console.log(contentDiv);
     createParenDiv.appendChild(createChildDiv);
     rootElem.appendChild(createParenDiv);
   });
 
   inputSearch();
+  displayingNumOfShow(showOnScreen, showOnScreen);
 }
 function inputSearch() {
   let mainDiv = document.querySelectorAll("#showProfile");
   let array = Array.from(mainDiv);
-  console.log(mainDiv);
   searchBar.addEventListener("keyup", function (e) {
     let searchTerm = e.target.value.toLowerCase();
 
@@ -217,11 +241,9 @@ function inputSearch() {
       }
     });
     // display number of filtered episodes from the searchBar
-    let newArray = newEpisodes.filter((val) => val.style.display === "block");
-    displayingEpisodes(newArray, array);
+    let newArray = array.filter((val) => val.style.display === "block");
+    displayingNumOfEpisodes(newArray, array);
   });
 }
 
-let getMyBtn = document.getElementById("myBtn");
-getMyBtn.addEventListener("click", setup);
 window.onload = setup;

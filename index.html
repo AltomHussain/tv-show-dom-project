@@ -9,20 +9,23 @@
   </head>
 
   <body>
-    <form id="Search-episode">
-      <button id="myBtn">home</button>
-      <select id="select-shows"> </select>
-      <select id="select-episodes"> </select>
-      <input
-        type="text"
-        id="styling-input"
-        placeholder="Search for an episode"
-        title="type in an episode"
-      />
-      <label id="myEpisode"> </label>
-    </form>
-
-    <div id="root"></div>
+    <div class="container">
+      <!-- <div class="form-style"> -->
+      <form id="Search-episode">
+        <button id="myBtn">home</button>
+        <select id="select-shows"> </select>
+        <select id="select-episodes"> </select>
+        <input
+          type="text"
+          id="styling-input"
+          placeholder="Search for an episode"
+          title="type in an episode"
+        />
+        <label id="myEpisode"> </label>
+      </form>
+      <!-- </div> -->
+      <div id="root"></div>
+    </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
