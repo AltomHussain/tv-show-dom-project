@@ -127,6 +127,7 @@ Show styling */
   margin: 20px;
 }
 .span-style {
+  flex-wrap: wrap;
   margin: 20px;
   justify-content: center;
   box-shadow: 10px 10px 6px 5px grey;
@@ -134,12 +135,11 @@ Show styling */
   width: 300px;
 }
 .style-head {
-  position: sticky;
-  top: 150px;
   text-align: center;
   text-shadow: 2px 2px #ff0000;
 }
 .span-style p {
+  flex-wrap: wrap;
   border-radius: 5px;
   margin-top: 20px;
   text-align: center;
