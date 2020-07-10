@@ -3,13 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <title>TV Show Project | Altom (AltomHussain)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-    <div id="root">
+    <div class="container">
+      <!-- <div class="form-style"> -->
+      <form id="Search-episode">
+        <button id="myBtn">home</button>
+        <select id="select-shows"> </select>
+        <select id="select-episodes"> </select>
+        <input
+          type="text"
+          id="styling-input"
+          placeholder="Search for an episode"
+          title="type in an episode"
+        />
+        <label id="myEpisode"> </label>
+      </form>
+      <!-- </div> -->
+      <div id="root"></div>
     </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
@@ -17,5 +32,6 @@
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
+    <script src="shows.js"></script>
   </body>
 </html>
